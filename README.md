@@ -1,27 +1,29 @@
-# Haskell Buildpack Demo
+# Haskell Demo on Heroku Cedar
 
 This demo is live on Heroku:
 
-http://haskell-buildpack-demo.herokuapp.com/
+http://docker-heroku-cedar-ghc.herokuapp.com/
 
-It uses the Haskell Buildpack:
+It uses the Heroku Cedar Docker Image:
 
-https://github.com/pufuwozu/heroku-buildpack-haskell
+https://github.com/mechairoi/docker-heroku-cedar-ghc
 
 ## Pushing to Heroku
 
 Clone this repository:
 
-    git clone https://github.com/pufuwozu/haskell-buildpack-demo.git
+    git clone https://github.com/mechairoi/docker-heroku-cedar-ghc.git
 
 Create a new Heroku application:
 
-    heroku create --stack=cedar --buildpack https://github.com/pufuwozu/heroku-buildpack-haskell.git
+    heroku create --stack=cedar
 
-Push!
+Install Docker: https://www.docker.io/gettingstarted/
 
-    git push heroku master
+Build & Push!
 
-*Note*: the push will take some time to install dependencies and might
-not show any output for quite a while. It will also show a lot of
-warnings.
+    make build
+    git checkout -b deploy
+    git add -f dist/build/heroku-haskell/heroku-haskell
+    git commit -m "build"
+    git push heroku deploy:master
